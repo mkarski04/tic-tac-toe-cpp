@@ -114,8 +114,15 @@ void winMsg(char player) {
     cout << endl << "Congratulations! " << player << " wins." << endl;
 }
 
+void drawMsg() {
+    clearScreen();
+    showBoard();
+    cout << endl << "It's a draw." << endl;
+}
+
 int main() {
     bool win;
+    int turns = 0;
 
     for (int i = 0; i < 3; i++) {
         for (int j = 0; j < 3; j++) {
@@ -125,12 +132,22 @@ int main() {
 
     for (;;) {
         placeX();
+        turns++;
+
         win = checkWin();
         if (win == true) {
             winMsg('X');
             break;
         }
+
+        if (turns == 9) {
+            drawMsg();
+            break;
+        }
+
         placeO();
+        turns++;
+
         win = checkWin();
         if (win == true) {
             winMsg('O');
